@@ -1,9 +1,14 @@
 import React from "react";
+import Header from "./Components/Header";
+import { Outlet } from "react-router-dom";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
     <div>
-      <h1 className="text-center">Namaste🙏</h1>
+      <Header />
+      <Outlet />
+      <Footer />
     </div>
   );
 }
