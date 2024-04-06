@@ -3,7 +3,7 @@ import React from "react";
 export default function Footer() {
   return (
     <>
-      <div className="flex absolute justify-evenly bg-black bg-opacity-60 text-white mt-10 py-4 md:py-14 w-screen bottom-0 px-4">
+      <div className="flex absolute justify-evenly bg-black bg-opacity-60 text-white mt-10 py-4 md:py-14 w-screen px-4">
         <div>
           <p>FAQ</p>    
           <p>Cookie Preferences</p>
