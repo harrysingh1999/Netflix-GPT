@@ -4,59 +4,71 @@ import { checkFormData } from "../Utils/formValidate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../Utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [isSignedIn, setIsSignedIn] = useState(true);
+  const [signedInForm, setSignedInForm] = useState(true);
   const [formError, setFormError] = useState(null);
   const userName = useRef(null);
   const Email = useRef(null);
   const Password = useRef(null);
+  const navigate = useNavigate();
 
   const handleToggleForm = () => {
-    setIsSignedIn(!isSignedIn);
+    setSignedInForm(!signedInForm);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let formResult = checkFormData(
-      userName.current.value,
-      Email.current.value,
-      Password.current.value
+      !signedInForm && userName?.current?.value,
+      Email?.current?.value,
+      Password?.current?.value
     );
     setFormError(formResult);
 
     if (formResult) return;
 
-    if (!isSignedIn) {
+    if (!signedInForm) {
       // Signed Up.....
       createUserWithEmailAndPassword(
         auth,
-        Email.current.value,
-        Password.current.value
+        Email?.current?.value,
+        Password?.current?.value
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: userName?.current?.value,
+          })
+            .then(() => {
+              navigate("/Browse");
+            })
+            .catch((error) => {
+              setFormError(error?.message);
+            });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          const errorMessage = error?.message;
+          setFormError(`${errorMessage}`);
         });
     } else {
       // Sign in .......................
-      signInWithEmailAndPassword(auth, Email.current.value,
-        Password.current.value)
+      signInWithEmailAndPassword(
+        auth,
+        Email?.current?.value,
+        Password?.current?.value
+      )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          // navigate("/Browse");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage)
+          const errorMessage = error?.message;
+          setFormError(`${errorMessage}`);
         });
     }
   };
@@ -75,9 +87,9 @@ export default function Login() {
       >
         <form onSubmit={(e) => handleSubmit(e)}>
           <h1 className="text-3xl font-bold mb-6 text-white">
-            {isSignedIn ? "Sign in" : "Sign up"}
+            {signedInForm ? "Sign in" : "Sign up"}
           </h1>
-          {!isSignedIn && (
+          {!signedInForm && (
             <input
               type="text"
               ref={userName}
@@ -102,11 +114,11 @@ export default function Login() {
               onClick={handleSubmit}
               className="bg-red-600 text-white p-2 rounded-md w-full font-semibold"
             >
-              {isSignedIn ? "Sign in" : "Sign up"}
+              {signedInForm ? "Sign in" : "Sign up"}
             </button>
             <p className="text-red-600 my-2"> {formError && formError} </p>
             <p className="my-4">OR</p>
-            {isSignedIn && (
+            {signedInForm && (
               <button className="bg-black/[0.3] border border-gray-400 text-white rounded-md mb-3 p-2 w-full font-semibold">
                 Use a Sign-in code
               </button>
@@ -121,13 +133,13 @@ export default function Login() {
           </div>
           <div className="text-white mt-4">
             <span className="mb-2 me-2">
-              {isSignedIn ? "New to Netflix?" : "Already a User?"}
+              {signedInForm ? "New to Netflix?" : "Already a User?"}
             </span>
             <span
               className="hover:underline cursor-pointer"
               onClick={handleToggleForm}
             >
-              {isSignedIn ? "Sign up" : "Sign in"}
+              {signedInForm ? "Sign up" : "Sign in"}
             </span>
           </div>
         </form>

@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "./Components/Header";
+import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import Footer from "./Components/Footer";
+import Footer from "./Footer";
 
-function App() {
+export default function App() {
   return (
     <div>
       <Header />
@@ -12,5 +12,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
