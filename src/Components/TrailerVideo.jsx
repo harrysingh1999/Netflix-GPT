@@ -7,7 +7,7 @@ export default function TrailerVideo({ movieId }) {
 
   const storeTrailerVideo = useSelector((store) => store.movie?.trailerVideo);
   return (
-    <div className="">
+    <div className="w-screen">
       <iframe
         className="w-screen aspect-video"
         src={`https://www.youtube.com/embed/${storeTrailerVideo?.key}?&autoplay=1&mute=1`}
