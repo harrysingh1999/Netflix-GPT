@@ -7,7 +7,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../Utils/firebase";
-import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [signedInForm, setSignedInForm] = useState(true);
@@ -15,7 +14,6 @@ export default function Login() {
   const userName = useRef(null);
   const Email = useRef(null);
   const Password = useRef(null);
-  const navigate = useNavigate();
 
   const handleToggleForm = () => {
     setSignedInForm(!signedInForm);
@@ -44,9 +42,7 @@ export default function Login() {
           updateProfile(user, {
             displayName: userName?.current?.value,
           })
-            .then(() => {
-              navigate("/Browse");
-            })
+            .then(() => {})
             .catch((error) => {
               setFormError(error?.message);
             });
@@ -64,7 +60,6 @@ export default function Login() {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          // navigate("/Browse");
         })
         .catch((error) => {
           const errorMessage = error?.message;
@@ -82,10 +77,13 @@ export default function Login() {
         }}
       ></div>
       <div
-        className="flex flex-col justify-center items-center mx-auto bg-black bg-opacity-70
-       w-[90%] md:w-[50%] lg:w-[40] xl:w-[25%] px-8 md:px-16 pt-8 pb-12 rounded-md relative "
+        className="flex flex-col justify-center items-center h-screen mx-auto
+          w-[90%] md:w-[50%] lg:w-[40] xl:w-[25%] relative"
       >
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className=" bg-black bg-opacity-70 px-8 md:px-16 pt-12 pb-16 rounded-lg"
+        >
           <h1 className="text-3xl font-bold mb-6 text-white">
             {signedInForm ? "Sign in" : "Sign up"}
           </h1>
@@ -118,11 +116,6 @@ export default function Login() {
             </button>
             <p className="text-red-600 my-2"> {formError && formError} </p>
             <p className="my-4">OR</p>
-            {signedInForm && (
-              <button className="bg-black/[0.3] border border-gray-400 text-white rounded-md mb-3 p-2 w-full font-semibold">
-                Use a Sign-in code
-              </button>
-            )}
             <p className="hover:underline">forgot Password?</p>
           </div>
           <div className="flex mt-4">
@@ -143,12 +136,6 @@ export default function Login() {
             </span>
           </div>
         </form>
-        <div>
-          <p className="mt-4 text-white">
-            This page is protected by google recaptcha to ensure you're not a
-            bot. Learn more.
-          </p>
-        </div>
       </div>
     </>
   );
