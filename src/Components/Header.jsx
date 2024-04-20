@@ -15,16 +15,14 @@ export default function Header() {
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/Login");
-      })
+      .then(() => {})
       .catch((error) => {
         console.log(error);
       });
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
@@ -34,11 +32,13 @@ export default function Header() {
         navigate("/Login");
       }
     });
+
+    return () => unsubscribe();
   }, []);
 
   return (
     <>
-      <div className="flex ms-24 me-10 justify-between relative z-10">
+      <div className="flex ps-24 pe-14 justify-between absolute z-10 w-screen bg-gradient-to-b from-black">
         <NavLink to="/">
           <img src={logo} alt="Netflix-Logo" className="w-44 z-10" />
         </NavLink>
@@ -53,7 +53,7 @@ export default function Header() {
               {storeUser.displayName}
             </p>
             <button
-              className="font-semibold hover:underline hover:text-red-700 "
+              className="font-semibold hover:underline hover:text-red-700 text-white"
               onClick={handleSignOut}
             >
               (Sign Out)

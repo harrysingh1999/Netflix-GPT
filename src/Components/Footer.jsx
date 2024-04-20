@@ -3,14 +3,13 @@ import React from "react";
 export default function Footer() {
   return (
     <>
-      <div className="flex relative justify-evenly bg-black bg-opacity-60 text-white mt-10 py-4 md:py-14 w-screen px-4">
+      <div
+        className="flex justify-evenly bg-black bg-opacity-70 text-white 
+      py-4 md:py-14 w-screen px-4 absolute z-10"
+      >
         <div>
           <p>FAQ</p>
           <p>Cookie Preferences</p>
-          <select className="bg-black text-white px-3 py-1 border border-gray-400">
-            <option value=""> English</option>
-            <option value=""> Hindi</option>
-          </select>
         </div>
         <div>
           <p>Help Center</p>
@@ -18,9 +17,11 @@ export default function Footer() {
         </div>
         <div>
           <p>Terms of Use</p>
+          <p>Policies</p>
         </div>
         <div>
           <p>Privacy</p>
+          <p>Data Security</p>
         </div>
       </div>
     </>
