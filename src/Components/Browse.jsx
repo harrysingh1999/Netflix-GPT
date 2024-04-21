@@ -8,7 +8,7 @@ export default function Browse() {
   useNowPlayingMovies();
   usePopularMovies();
   return (
-    <div className="w-full">
+    <div className="">
       <TrailerMovieContainer />
       <SecondaryMovieContainer />
     </div>
