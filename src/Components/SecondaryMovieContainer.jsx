@@ -5,8 +5,6 @@ import MoviesList from "./MoviesList";
 export default function SecondaryMovieContainer() {
   const storeMovies = useSelector((store) => store.movie);
 
-  console.log(storeMovies);
-
   return (
     <>
       <MoviesList
