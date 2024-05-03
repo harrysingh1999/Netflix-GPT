@@ -13,12 +13,14 @@ import Login from "./Components/Login";
 import { Provider } from "react-redux";
 import store from "./Utils/Store/Store";
 import Browse from "./Components/Browse";
+import AI_Search from "./Components/AI_Search";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="Login" element={<Login />} />
       <Route path="Browse" element={<Browse />} />
+      <Route path="AI_Search" element={<AI_Search />} />
     </Route>
   )
 );
@@ -32,6 +34,4 @@ root.render(
   </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
 reportWebVitals();

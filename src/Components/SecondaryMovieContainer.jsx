@@ -7,14 +7,14 @@ export default function SecondaryMovieContainer() {
 
   return (
     <>
-      <div className="bg-black/[0.3]">
+      <div className="bg-black/[0.3] max-w-[100vw] px-8">
         <MoviesList
-          nowPlayingMovies={storeMovies.nowPlayingMovies}
-          title="Now Playing"
+          movies={storeMovies.nowPlayingMovies}
+          title="Trending Movies & TV shows"
         />
         <MoviesList
-          nowPlayingMovies={storeMovies.popularMovies}
-          title="Popular Movies"
+          movies={storeMovies.topRatedMovies}
+          title="Top Rated Movies"
         />
       </div>
     </>

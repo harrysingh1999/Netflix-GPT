@@ -2,15 +2,25 @@ import React from "react";
 import { useNowPlayingMovies } from "../customHooks/useNowPlayingMovies";
 import TrailerMovieContainer from "./TrailerMovieContainer";
 import SecondaryMovieContainer from "./SecondaryMovieContainer";
-import { usePopularMovies } from "../customHooks/usePopularMovies";
+import { useTopRatedMovies } from "../customHooks/useTopRatedMovies";
+import { useSelector } from "react-redux";
+import AI_Search from "./AI_Search";
 
 export default function Browse() {
+  const storeAI_Search = useSelector((store) => store.search.AI_Search);
+
   useNowPlayingMovies();
-  usePopularMovies();
+  useTopRatedMovies();
   return (
-    <div className="">
-      <TrailerMovieContainer />
-      <SecondaryMovieContainer />
+    <div className="w-[100vw] max-w-[100vw]">
+      {!storeAI_Search ? (
+        <>
+          <TrailerMovieContainer />
+          <SecondaryMovieContainer />
+        </>
+      ) : (
+        <AI_Search />
+      )}
     </div>
   );
 }

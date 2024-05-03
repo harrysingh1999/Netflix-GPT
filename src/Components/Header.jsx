@@ -7,9 +7,11 @@ import { auth } from "../Utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../Utils/userSlice";
 import { signOut } from "firebase/auth";
+import { toggleAI_Search } from "../Utils/AI_SearchSlice";
 
 export default function Header() {
   const dispatch = useDispatch();
+  const storeAI_Search = useSelector((store) => store.search.AI_Search);
   const storeUser = useSelector((store) => store.user);
   const navigate = useNavigate();
 
@@ -19,6 +21,10 @@ export default function Header() {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleAI_Search = () => {
+    dispatch(toggleAI_Search());
   };
 
   useEffect(() => {
@@ -38,12 +44,22 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex ps-24 pe-14 justify-between absolute z-10 w-screen bg-gradient-to-b from-black">
+      <div
+        className={`flex ps-24 pe-14 justify-between ${
+          !storeAI_Search ? "absolute" : "relative"
+        } z-10 w-screen bg-gradient-to-b from-black`}
+      >
         <NavLink to="/">
           <img src={logo} alt="Netflix-Logo" className="w-44 z-10" />
         </NavLink>
         {storeUser && (
           <div className="flex items-center">
+            <button
+              className="bg-orange-300 px-3 py-2 rounded-lg me-4"
+              onClick={handleAI_Search}
+            >
+              {!storeAI_Search ? "AI Search" : "Homepage"}
+            </button>
             <img
               src={userProfile}
               alt="userprofile"
