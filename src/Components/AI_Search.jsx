@@ -5,8 +5,10 @@ export default function AI_Search() {
   const searchText = useRef(null);
 
   const handleAI_Search = async () => {
+    let AI_Prompt = `Act as a Advanced Movie and TV show recommendation system or expert and suggest the most accurate infomation for this input: ${searchText.current.value}. Remember to provide maximum 10 results`;
+
     const searchResult = await openai.chat.completions.create({
-      messages: [{ role: "user", content: "Say this is a test" }],
+      messages: [{ role: "user", content: AI_Prompt }],
       model: "gpt-3.5-turbo",
     });
     console.log(searchResult.choices);
