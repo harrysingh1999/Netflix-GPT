@@ -2,8 +2,7 @@ export const API_Options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmZkZTRkNWNmMzFlYjI2OTNmZTg2MDQ1OTZjNTgzYSIsInN1YiI6IjY0Y2U2MTAxNTQ5ZGRhMDBmZmEzYWE4OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VGY5tbEn74RlPTLhWzcQDGdHCXKtdB_xGxQ3db1hgzQ",
+    Authorization: `Bearer ${process.env.REACT_APP_TMDB_KEY}`,
   },
 };
 
@@ -18,5 +17,4 @@ export const settings = {
   slidesToScroll: 8,
 };
 
-export const OPENAI_API_KEY =
-  "sk-proj-o4QviF2AHCfMCNvkkxJgT3BlbkFJrHMm0h5eTL4VY1FxIXaB";
+export const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
