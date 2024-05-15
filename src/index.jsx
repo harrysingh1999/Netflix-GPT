@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import store from "./Utils/Store/Store";
 import Browse from "./Components/Browse";
 import AI_Search from "./Components/AI_Search";
+import MovieDetails from "./Components/MovieDetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="Login" element={<Login />} />
       <Route path="Browse" element={<Browse />} />
       <Route path="AI_Search" element={<AI_Search />} />
+      <Route path="MovieDetails" element={<MovieDetails />} />
     </Route>
   )
 );

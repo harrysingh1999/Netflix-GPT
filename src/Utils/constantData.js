@@ -20,4 +20,4 @@ export const settings = {
 export const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 export const aifakeData =
-  "Shooter, Wrath of Man, Non-stop, Salt, Jack Reacher, flight, genius, The Mechanic";
+  "Shooter, Wrath of Man, Non-stop, Jack Reacher, flight, genius, The Mechanic";

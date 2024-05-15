@@ -2,9 +2,13 @@ import React, { useRef } from "react";
 import { openai } from "../Utils/openAI";
 import { API_Options, aifakeData } from "../Utils/constantData";
 import { refFromURL } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { addAI_Movies } from "../Utils/movieSlice";
+import AI_ResultList from "./AI_ResultList";
 
 export default function AI_Search() {
   const searchText = useRef(null);
+  const dispatch = useDispatch();
 
   const searchAIResponse = async (input) => {
     let response = await fetch(
@@ -14,16 +18,19 @@ export default function AI_Search() {
     let parsedJSON = await response.json();
     let filteredData = parsedJSON.results.filter(
       (item) =>
-        item.original_title?.toLowerCase() === input.toLowerCase() &&
-        item.poster_path !== null
+        item.original_title?.toLowerCase().trim() ===
+          input.toLowerCase().trim() ||
+        (item.original_name?.toLowerCase().trim() ===
+          input.toLowerCase().trim() &&
+          item.poster_path !== null)
     );
     return filteredData;
-    return parsedJSON.results;
+    // return parsedJSON.results;
   };
 
   const handleAI_Search = async () => {
     // let AI_Prompt = `Act as a Advanced Movie and TV show recommendation system or expert and suggest the most accurate infomation for this input: ${searchText.current.value}.
-    //  Remember to provide maximum 10 results or as per the prompt`;
+    //  Remember to provide maximum 10 results or as per the prompt, each seperated with comma`;
 
     // const searchResult = await openai.chat.completions.create({
     //   messages: [{ role: "user", content: AI_Prompt }],
@@ -39,11 +46,16 @@ export default function AI_Search() {
     // const AI_result = searchResult.choices?.[0]?.message?.content.split(",");
 
     const AI_result = aifakeData.split(",");
-    console.log(AI_result);
 
     const promiseArray = AI_result.map((input) => searchAIResponse(input));
     const resolvedPromise = await Promise.all(promiseArray);
-    console.log(resolvedPromise);
+
+    dispatch(
+      addAI_Movies({
+        AI_Movies: resolvedPromise,
+        AI_Movies_Names: AI_result,
+      })
+    );
   };
   return (
     <>
@@ -63,6 +75,7 @@ export default function AI_Search() {
           Search
         </button>
       </form>
+      <AI_ResultList />
     </>
   );
 }
