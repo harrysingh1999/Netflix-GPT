@@ -5,7 +5,7 @@ export default function Footer() {
     <>
       <div
         className="flex justify-evenly bg-black bg-opacity-70 text-white 
-      py-4 md:py-14 w-screen px-4 absolute z-10"
+      py-4 md:py-14 px-4"
       >
         <div>
           <p>FAQ</p>

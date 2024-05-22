@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import TrailerVideo from "./TrailerVideo";
+import Iframe from "./Iframe";
 
 export default function TrailerMovieContainer() {
   const storeMovie = useSelector((store) => store.movie?.nowPlayingMovies);
@@ -21,7 +21,7 @@ export default function TrailerMovieContainer() {
           ℹ️ More Info
         </button>
       </div>
-      <TrailerVideo movieId={trailerMovie?.id} />
+      <Iframe movieId={trailerMovie?.id} css="w-[100vw] aspect-video" />
     </>
   );
 }

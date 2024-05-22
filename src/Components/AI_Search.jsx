@@ -25,7 +25,6 @@ export default function AI_Search() {
           item.poster_path !== null)
     );
     return filteredData;
-    // return parsedJSON.results;
   };
 
   const handleAI_Search = async () => {

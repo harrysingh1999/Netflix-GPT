@@ -15,6 +15,10 @@ import store from "./Utils/Store/Store";
 import Browse from "./Components/Browse";
 import AI_Search from "./Components/AI_Search";
 import MovieDetails from "./Components/MovieDetails";
+import MovieCredits from "./Components/MovieCredits";
+import Error from "./Components/Error";
+import Iframe from "./Components/Iframe";
+import Card from "./Components/Card";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +27,10 @@ const router = createBrowserRouter(
       <Route path="Browse" element={<Browse />} />
       <Route path="AI_Search" element={<AI_Search />} />
       <Route path="MovieDetails" element={<MovieDetails />} />
+      <Route path="MovieCredits" element={<MovieCredits />} />
+      <Route path="Card" element={<Card />} />
+      <Route path="Iframe" element={<Iframe />} />
+      <Route path="Error" element={<Error />} />
     </Route>
   )
 );
@@ -30,9 +38,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    {/* <React.StrictMode> */}
+    <RouterProvider router={router} />
+    {/* </React.StrictMode> */}
   </Provider>
 );
 

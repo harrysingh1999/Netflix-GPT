@@ -25,6 +25,7 @@ export default function Header() {
 
   const handleAI_Search = () => {
     dispatch(toggleAI_Search());
+    navigate(!storeAI_Search ? "/AI_Search" : "/Browse");
   };
 
   useEffect(() => {
@@ -45,11 +46,10 @@ export default function Header() {
   return (
     <>
       <div
-        className={`flex ps-24 pe-14 justify-between ${
-          !storeAI_Search ? "absolute" : "relative"
-        } z-10 w-screen bg-gradient-to-b from-black`}
+        className={`flex ps-24 pe-14 justify-between 
+         z-10 bg-gradient-to-b from-black`}
       >
-        <NavLink to="/">
+        <NavLink to="/Browse">
           <img src={logo} alt="Netflix-Logo" className="w-44 z-10" />
         </NavLink>
         {storeUser && (

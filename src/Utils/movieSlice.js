@@ -9,6 +9,8 @@ const movieSlice = createSlice({
     AI_Movies: null,
     AI_Movies_Names: null,
     movieDetails: null,
+    movieCredits: null,
+    similarMovies: null,
   },
   reducers: {
     addNowPlayingMovies: (state, action) => {
@@ -26,7 +28,13 @@ const movieSlice = createSlice({
       state.AI_Movies_Names = AI_Movies_Names;
     },
     addMovieDetails: (state, action) => {
-      state.movieDetails = action.payload;
+      const { movieDetails, movieCredits, similarMovies } = action.payload;
+      state.movieDetails = movieDetails;
+      state.movieCredits = movieCredits;
+      state.similarMovies = similarMovies;
+    },
+    addMovieCredits: (state, action) => {
+      state.movieCredits = action.payload;
     },
   },
 });
