@@ -1,5 +1,5 @@
 import React from "react";
-import { credits_Carousel, img_Url, settings } from "../Utils/constantData";
+import { credits_Carousel, img_Url } from "../Utils/constantData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

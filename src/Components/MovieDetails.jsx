@@ -47,7 +47,7 @@ export default function MovieDetails() {
   }, [routedMovieId]);
 
   return (
-    <div className="text-white bg-black">
+    <div className="text-white bg-black select-none">
       {movieDetails?.id ? (
         <>
           <img
